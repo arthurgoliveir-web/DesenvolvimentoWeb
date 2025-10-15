@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ConnectPro - Login</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="../CSS/estilos.css">
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
 </head>
 <body>
     <div class="navbar">
         <div class="navbar-logo">
-            <img src="logo.png" alt="Logo do ConnectPro" class="tamanho-logo">
+            <img src="../IMG/logo.png" alt="Logo do ConnectPro" class="tamanho-logo">
         </div>
         <div class="navbar-menu">
-            <span><a href="PI - Pagina Inicial.html">Início</a></span>
-            <span><a href="PI - Serviços.html">Serviços</a></span>
-            <span><a href="PI - Sobre.html">Sobre</a></span>
-            <span><a href="PI - Ajuda.html">Ajuda</a></span>
+           <span><a href="../PI - Página Inicial/PI - Pagina Inicial.html">Início</a></span>
+            <span><a href="../PI - Serviços/PI - Serviços.html">Serviços</a></span>
+            <span><a href="../PI - Sobre/PI - Sobre.html">Sobre</a></span>
+            <span><a href="../PI - Ajuda/PI - Ajuda.html">Ajuda</a></span>
         </div>
         <div class="navbar-icones">
-            <span><img src="procurar.png" alt="Procurar" class="tamanho-icones"></span>
-            <span><img src="carrinho.png" alt="Carrinho" class="tamanho-icones"></span>
-            <span><a href="PI - Login.html"><img src="login3.png" alt="Login" class="tamanho-icones"></a></span>
+            <span><img src="../IMG/procurar.png" alt="Procurar" class="tamanho-icones"></span>
+            <span><img src="../IMG/carrinho.png" alt="Carrinho" class="tamanho-icones"></span>
+            <span><a href="PI - Login.html"><img src="../IMG/login3.png" alt="Login" class="tamanho-icones"></a></span>
         </div>
     </div>
 
@@ -30,10 +30,12 @@
             <h2>Entrar na sua conta</h2>
             <form>
                 <label for="email">E-mail:</label>
-                <input type="email" id="email" placeholder="exemplo@gmail.com" required>
+                <input type="email" id="email" placeholder="exemplo@gmail.com">
+                <small id="hint-email" class="hint msg" aria-live="polite"></small> 
 
                 <label for="senha">Senha:</label>
                 <input type="password" id="senha" minlength="6" required>
+                <small id="hint-senha" class="hint"></small> 
 
                 <button type="submit">Entrar</button>
                 <div class="login-links">
@@ -45,12 +47,12 @@
     
     <footer>
         <div style="padding-left: 50px;">
-            <img src="logoalt.png" alt="Logo Alternativo"><br><br>
+            <img src="../IMG/logoalt.png" alt="Logo Alternativo"><br><br>
             <div class="social-logos">
-                <a href="https://www.instagram.com/" target="_blank"><img src="instagram.png" alt="Logo Instagram"></a>
-                <a href="https://www.facebook.com/?locale=pt_BR" target="_blank"><img src="facebook.png" alt="Logo Facebook"></a>
-                <a href="https://x.com/?lang=pt" target="_blank"><img src="twitter.png" alt="Logo Twitter"></a>
-                <a href="https://br.linkedin.com/" target="_blank"><img src="linkedin.png" alt="Logo LinkedIn"></a>
+                <a href="https://www.instagram.com/" target="_blank"><img src="../IMG/instagram.png" alt="Logo Instagram"></a>
+                <a href="https://www.facebook.com/?locale=pt_BR" target="_blank"><img src="../IMG/facebook.png" alt="Logo Facebook"></a>
+                <a href="https://x.com/?lang=pt" target="_blank"><img src="../IMG/twitter.png" alt="Logo Twitter"></a>
+                <a href="https://br.linkedin.com/" target="_blank"><img src="../IMG/linkedin.png" alt="Logo LinkedIn"></a>
             </div>
         </div>
         <div class="foot-menu">
@@ -87,6 +89,6 @@
             </span>
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="../JS/script.js"></script>
 </body>
 </html>
