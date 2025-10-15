@@ -18,33 +18,58 @@ function mostrarCategoria(id)
     })
 
 }
-// validação de email e constant 
-const emailInput = document.getElementById("email");
-const hintEmail = document.getElementById("hint-email");
-
-const reMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;// validar e-mail e dominio
-const vMail = v => reMail.test(v.trim());
-
-function validarEmail() {
-    const valor = emailInput.value;
-    if (!vMail(valor)) {
-        hintEmail.textContent = "Digite um e-mail válido (exemplo@dominio.com)";
-        hintEmail.style.color = "red";
-        return false;
-    } else {
-        hintEmail.textContent = "";
-        return true;
-    }
-}
+// validação do login
 document.addEventListener("DOMContentLoaded", function() {
+
     const form = document.querySelector("form");
-    if (form) {
-        form.addEventListener("submit", function(e) {
-            if (!validarEmail()) {
-                e.preventDefault();
-                emailInput.focus();
-            }
-        });
-        emailInput.addEventListener("input", validarEmail);
+    const emailInput = document.getElementById("email");
+    const hintEmail = document.getElementById("hint-email");
+    const senhaInput = document.getElementById("senha");
+    const hintSenha = document.getElementById("hint-senha");
+
+    const reMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const vMail = (valor) => reMail.test(valor.trim());
+
+    const reSenha = /.{6,}/;
+    const vSenha = (valor) => reSenha.test(valor);
+
+    function validarEmail() {
+        const emailValido = vMail(emailInput.value);
+        if (!emailValido) {
+            hintEmail.textContent = "Digite um e-mail válido (exemplo@dominio.com)";
+            emailInput.classList.add("erro");
+             hintEmail.style.color = "red";
+        } else {
+            hintEmail.textContent = "";
+            emailInput.classList.remove("erro");
+        }
+        return emailValido;
     }
+
+    function validarSenha() {
+        const senhaValida = vSenha(senhaInput.value);
+        if (!senhaValida) {
+            hintSenha.textContent = "A senha deve ter pelo menos 6 caracteres.";
+            senhaInput.classList.add("erro");
+            hintSenha.style.color = "red";
+        } else {
+            hintSenha.textContent = "";
+            senhaInput.classList.remove("erro");
+        }
+        return senhaValida;
+    }
+
+    emailInput.addEventListener("input", validarEmail);
+    senhaInput.addEventListener("input", validarSenha);
+
+    form.addEventListener("submit", function(e) {
+        const emailEstaOk = validarEmail();
+        const senhaEstaOk = validarSenha();
+
+        if (!emailEstaOk || !senhaEstaOk) {
+            e.preventDefault();
+            console.log("Envio bloqueado: formulário inválido.");
+        }
+    });
 });
+
