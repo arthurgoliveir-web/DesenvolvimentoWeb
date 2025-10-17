@@ -73,3 +73,58 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// Barra de procura na sidebar
+document.addEventListener('DOMContentLoaded', function() {
+    const busca = document.getElementById('busca-categorias');
+    const lista = document.getElementById('lista-categorias');
+    const sugestoes = document.getElementById('sugestoes-categoria');
+    const categorias = Array.from(lista.children).map(li => li.textContent.trim());
+
+    busca.addEventListener('input', function() {
+        const termo = removerAcentos(busca.value.trim().toLowerCase());
+        sugestoes.innerHTML = '';
+        if (termo.length === 0) {
+            sugestoes.style.display = 'none';
+            return;
+        }
+        const filtradas = categorias.filter(cat => removerAcentos(cat.toLowerCase()).includes(termo));
+        if (filtradas.length > 0) {
+            sugestoes.style.display = 'block';
+            filtradas.forEach(cat => {
+                const div = document.createElement('div');
+                div.textContent = cat;
+                div.style.cursor = 'pointer';
+                div.style.background = '#fff';
+                div.style.border = '1px solid #c4c4c4';
+                div.style.padding = '6px 10px';
+                div.style.marginBottom = '2px';
+                div.onclick = function() {
+                    busca.value = cat;
+                    sugestoes.innerHTML = '';
+                    sugestoes.style.display = 'none';
+                    abrirCategoria(cat);
+                };
+                sugestoes.appendChild(div);
+            });
+        } else {
+            sugestoes.style.display = 'none';
+        }
+    });
+
+    busca.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            abrirCategoria(busca.value.trim());
+            sugestoes.innerHTML = '';
+            sugestoes.style.display = 'none';
+        }
+    });
+
+    function abrirCategoria(nome) {
+        const nomeSemAcento = removerAcentos(nome.toLowerCase());
+        lista.querySelectorAll('li').forEach(li => {
+            if (removerAcentos(li.textContent.trim().toLowerCase()) === nomeSemAcento) {
+                li.click();
+            }
+        });
+    }
+});
