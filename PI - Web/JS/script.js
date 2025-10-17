@@ -16,4 +16,115 @@ function mostrarCategoria(id)
             li.classList.add('ativo');
         }
     })
+
 }
+// validação do login
+document.addEventListener("DOMContentLoaded", function() {
+
+    const form = document.querySelector("form");
+    const emailInput = document.getElementById("email");
+    const hintEmail = document.getElementById("hint-email");
+    const senhaInput = document.getElementById("senha");
+    const hintSenha = document.getElementById("hint-senha");
+
+    const reMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const vMail = (valor) => reMail.test(valor.trim());
+
+    const reSenha = /.{6,}/;
+    const vSenha = (valor) => reSenha.test(valor);
+
+    function validarEmail() {
+        const emailValido = vMail(emailInput.value);
+        if (!emailValido) {
+            hintEmail.textContent = "Digite um e-mail válido (exemplo@dominio.com)";
+            emailInput.classList.add("erro");
+             hintEmail.style.color = "red";
+        } else {
+            hintEmail.textContent = "";
+            emailInput.classList.remove("erro");
+        }
+        return emailValido;
+    }
+
+    function validarSenha() {
+        const senhaValida = vSenha(senhaInput.value);
+        if (!senhaValida) {
+            hintSenha.textContent = "A senha deve ter pelo menos 6 caracteres.";
+            senhaInput.classList.add("erro");
+            hintSenha.style.color = "red";
+        } else {
+            hintSenha.textContent = "";
+            senhaInput.classList.remove("erro");
+        }
+        return senhaValida;
+    }
+
+    emailInput.addEventListener("input", validarEmail);
+    senhaInput.addEventListener("input", validarSenha);
+
+    form.addEventListener("submit", function(e) {
+        const emailEstaOk = validarEmail();
+        const senhaEstaOk = validarSenha();
+
+        if (!emailEstaOk || !senhaEstaOk) {
+            e.preventDefault();
+            console.log("Envio bloqueado: formulário inválido.");
+        }
+    });
+});
+
+// Barra de procura na sidebar
+document.addEventListener('DOMContentLoaded', function() {
+    const busca = document.getElementById('busca-categorias');
+    const lista = document.getElementById('lista-categorias');
+    const sugestoes = document.getElementById('sugestoes-categoria');
+    const categorias = Array.from(lista.children).map(li => li.textContent.trim());
+
+    busca.addEventListener('input', function() {
+        const termo = removerAcentos(busca.value.trim().toLowerCase());
+        sugestoes.innerHTML = '';
+        if (termo.length === 0) {
+            sugestoes.style.display = 'none';
+            return;
+        }
+        const filtradas = categorias.filter(cat => removerAcentos(cat.toLowerCase()).includes(termo));
+        if (filtradas.length > 0) {
+            sugestoes.style.display = 'block';
+            filtradas.forEach(cat => {
+                const div = document.createElement('div');
+                div.textContent = cat;
+                div.style.cursor = 'pointer';
+                div.style.background = '#fff';
+                div.style.border = '1px solid #c4c4c4';
+                div.style.padding = '6px 10px';
+                div.style.marginBottom = '2px';
+                div.onclick = function() {
+                    busca.value = cat;
+                    sugestoes.innerHTML = '';
+                    sugestoes.style.display = 'none';
+                    abrirCategoria(cat);
+                };
+                sugestoes.appendChild(div);
+            });
+        } else {
+            sugestoes.style.display = 'none';
+        }
+    });
+
+    busca.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            abrirCategoria(busca.value.trim());
+            sugestoes.innerHTML = '';
+            sugestoes.style.display = 'none';
+        }
+    });
+
+    function abrirCategoria(nome) {
+        const nomeSemAcento = removerAcentos(nome.toLowerCase());
+        lista.querySelectorAll('li').forEach(li => {
+            if (removerAcentos(li.textContent.trim().toLowerCase()) === nomeSemAcento) {
+                li.click();
+            }
+        });
+    }
+});
