@@ -475,3 +475,106 @@ footer
     outline-offset: 0px;
 }
 /* Página de Serviços*/
+
+/* Estilos para a página de modelos de serviços*/
+.molde-header {
+    background-color: white;
+    padding: 5px 30px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;     /* Espaço ABAIXO da linha */
+}
+
+.voltar-link-abaixo {
+    display: block; /* Para poder aplicar margem */
+    text-decoration: none;
+    color: #07484A; /* Sua cor principal */
+    font-size: 1.1em;
+    font-weight: 500;
+    font-family: 'Open Sans', sans-serif;
+    
+    /* Alinha o link com o conteúdo principal */
+    max-width: 900px;
+    margin: 0 auto 20px auto; 
+    padding: 0 40px; 
+}
+
+.voltar-link-abaixo:hover {
+    text-decoration: underline;
+}
+
+/* Container principal da página de detalhe */
+main#detalhe {
+    max-width: 900px; /* Define uma largura máxima */
+    margin: 30px auto; /* Centraliza na página com espaço */
+    padding: 30px 40px; /* Espaçamento interno */
+    background-color: #ffffff; /* Fundo branco (como a sidebar) */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Sombra suave */
+}
+
+/* Título do Serviço */
+main#detalhe h1#titulo {
+    font-family: 'Open Sans', sans-serif; /* Usando fontes do seu CSS */
+    color: #07484A; /* Cor principal do seu site */
+    font-size: 2.8em; /* Tamanho grande para o título */
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+/* Imagem do Serviço */
+main#detalhe img#imagem {
+    display: block;       
+    margin-left: auto;    
+    margin-right: auto;   
+    
+    width: 100%;
+    max-width: 600px;     
+
+    height: auto; /* Mantém a proporção */
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border: 1px solid #eee; /* Borda sutil */
+}
+
+/* Preço */
+main#detalhe p#preco {
+    font-family: 'Roboto', sans-serif; /* Usando fontes do seu CSS */
+    font-size: 1.6em; /* Tamanho destacado para o preço */
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Descrição */
+main#detalhe p#descricao {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.1em;
+    line-height: 1.7; /* Espaçamento entre linhas para melhor leitura */
+    margin-bottom: 30px;
+    text-align: left;
+    color: #333;
+}
+
+/* Botão de Contato */
+main#detalhe button#btn-contato {
+    display: inline-block;
+    background-color: #00796b; /* Cor do seu botão de login */
+    color: #ffffff; /* Texto branco */
+    font-size: 1.1em;
+    font-weight: 500;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 5px; /* Cantos arredondados */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+main#detalhe button#btn-contato:hover {
+    background-color: #07484A; /* Cor principal no hover */
+}
+
+/* Estilos para a página de modelos de serviços*/
