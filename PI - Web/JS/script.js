@@ -128,3 +128,58 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+// Pagina molde
+    const produtos = {
+      "programacao-1": {
+        titulo: "Desenvolvimento Web - Básico",
+        imagem: "https://picsum.photos/seed/programacao-1/800/500",
+        preco: "A partir de R$ 150",
+        descricao: "Criação de site simples, responsivo, até 5 páginas.",
+        categoria: "programacao-categoria"
+      },
+      "programacao-2": {
+        titulo: "Desenvolvimento Web - Avançado",
+        imagem: "https://picsum.photos/seed/programacao-2/800/500",
+        preco: "A partir de R$ 450",
+        descricao: "Aplicações web com backend, integração e deploy.",
+        categoria: "programacao-categoria"
+      },
+      "design-grafico-1": {
+        titulo: "Design Gráfico - Logo",
+        imagem: "https://picsum.photos/seed/design-1/800/500",
+        preco: "A partir de R$ 80",
+        descricao: "Criação de identidade visual e logo profissional."
+      }
+      // adicionar mais items...
+    };
+
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function carregarProduto() {
+      const id = getQueryParam('id');
+      const main = document.getElementById('detalhe');
+      const titulo = document.getElementById('titulo');
+      const imagem = document.getElementById('imagem');
+      const preco = document.getElementById('preco');
+      const descricao = document.getElementById('descricao');
+
+      if (!id || !produtos[id]) {
+        titulo.textContent = "Produto não encontrado";
+        descricao.textContent = "Verifique se o link está correto.";
+        imagem.style.display = 'none';
+        preco.textContent = '';
+        return;
+      }
+
+      const p = produtos[id];
+      titulo.textContent = p.titulo;
+      imagem.src = p.imagem;
+      imagem.alt = p.titulo;
+      preco.textContent = p.preco;
+      descricao.textContent = p.descricao;
+    }
+
+    carregarProduto();
