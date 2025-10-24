@@ -132,24 +132,46 @@ document.addEventListener('DOMContentLoaded', function() {
     const produtos = {
       "programacao-1": {
         titulo: "Desenvolvimento Web - Básico",
-        imagem: "https://picsum.photos/seed/programacao-1/800/500",
+        imagem: "../IMG/programa-1.png",   
         preco: "A partir de R$ 150",
         descricao: "Criação de site simples, responsivo, até 5 páginas.",
         categoria: "programacao-categoria"
       },
       "programacao-2": {
         titulo: "Desenvolvimento Web - Avançado",
-        imagem: "https://picsum.photos/seed/programacao-2/800/500",
+        imagem: "../IMG/programa-2.jpg",
         preco: "A partir de R$ 450",
         descricao: "Aplicações web com backend, integração e deploy.",
         categoria: "programacao-categoria"
       },
+     "programacao-3": {
+        titulo: "Criação de Banco de Dados",
+        imagem: "../IMG/banco de dados 1.jpg",
+        preco: "A partir de R$ 550",
+        descricao: "Criação avançada de banco de dados para sites já em desenvolvimento.",
+        categoria: "programacao-categoria"
+      },
+      "jardinagem-1":{
+        titulo: "Jardinagem e paisagismo",
+        imagem:"../IMG/jardinagem 1.webp",
+        preco:"Preço a negociar",
+        descricao:"Paisagismo profissinal",
+        categoria:"Jardinagem-categoria",
+      },
+    "marcenaria-1":{
+        titulo: "Ajuste de móveis",
+        imagem:"../IMG/marcenaria 1.png",
+        preco:"A partir de R$ 200   ",
+        descricao:"Ajustes, restauração e fabricação de móveis",
+        categoria:"Marcenaria-categoria",
+      },
       "design-grafico-1": {
-        titulo: "Design Gráfico - Logo",
-        imagem: "https://picsum.photos/seed/design-1/800/500",
-        preco: "A partir de R$ 80",
-        descricao: "Criação de identidade visual e logo profissional."
-      }
+        titulo: "Design Gráfico - Criação de logo",
+        imagem: "../IMG/Design Grafico 1.jpg",
+        preco: "A partir de R$ 120",
+        descricao: "Criação de logo profissional.",
+        categoria: "Design Gráfico-categoria"
+      },
       // adicionar mais items...
     };
 
