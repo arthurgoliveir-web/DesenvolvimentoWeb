@@ -1,3 +1,7 @@
+//Cingo:
+//Não se preucupa com esse arquivo, ele é so uma coisa que eu tava usando prra testar algumas coisas
+// Ele é tipo um arquivo de configuração do VS Code pra rodar tarefas automatizadas, mas n tem nada a ver com o projeto
+//Ele so ta aqui pq eu notei que tinha algumas coisas estranhas acontecendo com as tasks do VS Code
 {
 	"version": "2.0.0",
 	"tasks": [
