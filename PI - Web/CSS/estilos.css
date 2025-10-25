@@ -90,33 +90,90 @@ body
     padding-left: 100px;
     padding-top: 200px;
     font-size: 180%;
-    color:#07484A;
+    color: #07484A;
+    font-weight: bold;
+}
+.tamanho-vitrine h1  /*Mudei algumas coisas aqui para melhorar a visibilidade do texto na pagina inicial*/
+{
+    background-color: rgba(255, 255, 255, 0.75); /*Isso aqui é basicamente um fundo branco com transparencia para melhorar a visibilidade do texto*/
+    padding: 20px 30px;
+    border-radius: 15px;
+    display: inline-block;
+    backdrop-filter: blur(5px);
 }
 .conteudo-vitrine
 {
     padding-left: 100px;
     padding-bottom: 300px;
     font-size: 150%;
-    color:#07484A;
+    color: #07484A;
     font-family:'Open Sans';
 }
-.botao-vitrine
+.conteudo-vitrine p /*mesma coisa que o h1 acima*/
 {
-    transition: transform 0.3s ease, filter 0.3s ease;
-    display: inline-block;
-    transform-origin: center;
+    background-color: rgba(255, 255, 255, 0.75);
+    padding: 15px 25px;
+    border-radius: 10px;
+    display: block;
+    width: fit-content;
+    backdrop-filter: blur(5px);
 }
-.botao-vitrine:hover
+.botao-vitrine  /*mudei o botão pra ser mais customizavel e facil de editar*/
 {
-    filter: brightness(0.85) contrast(1.2);
+    margin-top: 20px;
+    display: inline-block;
+}
+.botao-vitrine a  /*O botão agora é um link estilizado*/
+{
+    background-color: #07484A;
+    color: white;
+    padding: 15px 40px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 110%;
+    font-weight: bold;
+    font-family: 'Open Sans';
+    display: inline-block;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+.botao-vitrine a:hover
+{
+    background-color: #0a5f62;
     transform: scale(1.1);
 }
-.fundo-vitrine
+.fundo-vitrine   /*IImagem que esta atras do texto na pagina inicial*/
 {
-    background-color:#c4c4c4;
+    position: relative;
+    background-image: url('../IMG/inicial/fotocapainicial.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border-bottom-left-radius: 60px;
     border-bottom-right-radius: 60px;
     box-shadow: 4px 4px 8px 0px rgba(0,0,0,0.5);
+}
+.fundo-vitrine::before  /*Tava dificil ver o texto com a imagem atras, entao coloquei um filtro de blur para melhorar a visibilidade do texto*/
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../IMG/inicial/fotocapainicial.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(1px) brightness(0.9);
+    border-bottom-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+    z-index: 0;
+}
+.fundo-vitrine > *
+{
+    position: relative;
+    z-index: 1;
 }
 /*CORPO*/
 
