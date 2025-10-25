@@ -123,24 +123,101 @@
         <section class="ajuda-section">
             <h2 class="ajuda-section-titulo">Recursos Úteis</h2>
             <div class="recursos-grid">
-                <div class="recurso-card">
+                <!-- Cada card é clicável e abre um modal (janela popup) -->
+                <div class="recurso-card" onclick="abrirModal('modalComprador')">
                     <h3>Guia do Comprador</h3>
                     <p>Aprenda a escolher o melhor profissional e garantir um serviço de qualidade.</p>
                 </div>
-                <div class="recurso-card">
+                <div class="recurso-card" onclick="abrirModal('modalPrestador')">
                     <h3>Guia do Prestador</h3>
                     <p>Dicas para criar um perfil atrativo e conquistar mais clientes.</p>
                 </div>
-                <div class="recurso-card">
+                <div class="recurso-card" onclick="abrirModal('modalSeguranca')">
                     <h3>Políticas de Segurança</h3>
                     <p>Conheça nossas medidas para proteger suas transações e dados.</p>
                 </div>
-                <div class="recurso-card">
+                <div class="recurso-card" onclick="abrirModal('modalBlog')">
                     <h3>Blog ConnectPro</h3>
                     <p>Artigos, tendências e novidades do mercado de serviços.</p>
                 </div>
             </div>
         </section>
+
+        <!-- Modais (janelas popup) dos Recursos -->
+        <!-- Modal 1: Guia do Comprador -->
+        <div id="modalComprador" class="modal">
+            <div class="modal-conteudo">
+                <!-- Botão X para fechar o modal -->
+                <span class="modal-fechar" onclick="fecharModal('modalComprador')">&times;</span>
+                <h2>Guia do Comprador</h2>
+                <div class="modal-texto">
+                    <!-- Conteúdo do guia (substitua os textos Lorem Ipsum) -->
+                    <h3>Como escolher o melhor profissional</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    
+                    <h3>Dicas importantes</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    
+                    <h3>Garantindo qualidade</h3>
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 2: Guia do Prestador -->
+        <div id="modalPrestador" class="modal">
+            <div class="modal-conteudo">
+                <span class="modal-fechar" onclick="fecharModal('modalPrestador')">&times;</span>
+                <h2>Guia do Prestador</h2>
+                <div class="modal-texto">
+                    <h3>Criando seu perfil</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    
+                    <h3>Conquistando clientes</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    
+                    <h3>Melhores práticas</h3>
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 3: Políticas de Segurança -->
+        <div id="modalSeguranca" class="modal">
+            <div class="modal-conteudo">
+                <span class="modal-fechar" onclick="fecharModal('modalSeguranca')">&times;</span>
+                <h2>Políticas de Segurança</h2>
+                <div class="modal-texto">
+                    <h3>Proteção de dados</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    
+                    <h3>Transações seguras</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    
+                    <h3>Suas informações</h3>
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 4: Blog ConnectPro -->
+        <div id="modalBlog" class="modal">
+            <div class="modal-conteudo">
+                <span class="modal-fechar" onclick="fecharModal('modalBlog')">&times;</span>
+                <h2>Blog ConnectPro</h2>
+                <div class="modal-texto">
+                    <h3>Tendências do mercado</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    
+                    <h3>Artigos recentes</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    
+                    <h3>Novidades</h3>
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
+                </div>
+            </div>
+        </div>
+    </main>
     </main>
 
     <footer>
@@ -189,29 +266,41 @@
     </footer>
 
     <script>
-        // Função para abrir e fechar as perguntas do FAQ
+        // Função Recursos uteis / faq
+        // Abre e fecha as perguntas quando clica nelas
         function toggleFAQ(elemento) {
-            // Pega o item FAQ pai
             const faqItem = elemento.parentElement;
-            
-            // Pega a resposta (próximo elemento após a pergunta)
             const resposta = elemento.nextElementSibling;
-            
-            // Pega o ícone + ou -
             const icone = elemento.querySelector('.faq-icone');
-            
-            // Verifica se está aberto ou fechado
             const estaAberto = faqItem.classList.contains('faq-aberto');
             
-            // Se estiver aberto, fecha
             if (estaAberto) {
                 faqItem.classList.remove('faq-aberto');
                 icone.textContent = '+';
             } 
-            // Se estiver fechado, abre
+            // Se fechado, abre
             else {
+                //pergunta
                 faqItem.classList.add('faq-aberto');
                 icone.textContent = '−';
+            }
+        }
+
+        // abrir modal
+        function abrirModal(idModal) {
+            const modal = document.getElementById(idModal);
+            modal.style.display = 'flex';
+        }
+
+        // Função para fechar modal
+        function fecharModal(idModal) {
+            const modal = document.getElementById(idModal);
+            modal.style.display = 'none';
+        }
+        // Fecha o modal 
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
             }
         }
     </script>
