@@ -1,9 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
 body
 {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    background-color:white;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 .tamanho-logo
 {
@@ -16,8 +22,7 @@ body
     height: 25px;
     margin-right: 50px;
     cursor: pointer;
-    transition:transform 0.3s ease, opacity 0.3s ease;
-    display: inline-block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
     transform-origin: center;
 }
 .tamanho-icones:hover
@@ -93,7 +98,6 @@ body
 .botao-vitrine
 {
     transition: transform 0.3s ease, opacity 0.3s ease;
-    display: inline-block;
     transform-origin: center;
 }
 .botao-vitrine:hover
@@ -119,7 +123,6 @@ footer
 }
 .foot-menu 
 {
-    /*padding-left: 500px;*/
     display: flex;
     justify-content: center;
     gap: 150px;
@@ -141,7 +144,7 @@ footer
 {
     background-color: white;
     width: 100%;
-    /*padding: 500px 0;*/
+    padding: 50px 0;
 }
 .meio-titulo
 {
@@ -316,10 +319,8 @@ footer
   height: 160px;       /* ajuste a altura conforme sua preferência */
   object-fit: cover;   /* recorta e cobre o box sem distorcer */
   border-radius: 8px;
-  display: block;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    display: inline-block;
-    transform-origin: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
 }
 .grid .card img:hover,
 .grid img:hover
