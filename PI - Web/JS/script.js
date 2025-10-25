@@ -1,3 +1,28 @@
+// Animação de fade-in da imagem de fundo sempre que a página carrega
+// Deu muita merda aqui, se tiver algo errado é por causa disso, mas deve ta funcionando agora
+//Eu não entendo totalmente esse codigo, eu usei um pouco de ai e outras coisas, mas ta funcionando
+//Tem muitas coisas tecnicas e sobre desempenho pra fazer uma animação suave na imagem do fundo
+//Mas eu não manjo muito disso ainda, então fiz o que deu pra fazer, se quiser melhorar é melhor fazer do começo
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.fundo-vitrine');
+    const bg = container ? container.querySelector('.bg-vitrine') : null;
+    if (!container || !bg) return;
+
+    container.classList.remove('loaded');
+
+    const show = () => container.classList.add('loaded');
+
+    if (bg.complete && bg.naturalWidth > 0) {
+ 
+        requestAnimationFrame(show);
+    } else {
+
+        bg.addEventListener('load', show, { once: true });
+
+        setTimeout(show, 1500);
+    }
+});
+
 function removerAcentos(str)
 {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");

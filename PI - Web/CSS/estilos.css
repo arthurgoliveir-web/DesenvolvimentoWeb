@@ -3,12 +3,26 @@
     --fundo-footer: #F3F6F5;
 
 }
+
+/* Animação de slide para transição de páginas */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 body
 {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     background-color:white;
+    animation: slideIn 0.4s ease-out;
 }
 
 /*HEADER*/
@@ -145,30 +159,29 @@ body
 .fundo-vitrine   /*IImagem que esta atras do texto na pagina inicial*/
 {
     position: relative;
-    background-image: url('../IMG/inicial/fotocapainicial.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: #c4c4c4;
     border-bottom-left-radius: 60px;
     border-bottom-right-radius: 60px;
     box-shadow: 4px 4px 8px 0px rgba(0,0,0,0.5);
 }
-.fundo-vitrine::before  /*Tava dificil ver o texto com a imagem atras, entao coloquei um filtro de blur para melhorar a visibilidade do texto*/
-{
-    content: '';
+.fundo-vitrine .bg-vitrine /* camada de imagem real para controlar onload e transição */
+{  /*olha fiz muitas modificações pra imagem não aparecer do nada, mas não ta perfeito ainda*/
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('../IMG/inicial/fotocapainicial.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     filter: blur(1px) brightness(0.9);
     border-bottom-left-radius: 60px;
     border-bottom-right-radius: 60px;
     z-index: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+}
+.fundo-vitrine.loaded .bg-vitrine
+{
+    opacity: 1;
 }
 .fundo-vitrine > *
 {
