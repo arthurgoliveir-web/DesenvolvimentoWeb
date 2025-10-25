@@ -4,35 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ConnectPro - Ajuda</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="../CSS/estilos.css">
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #eeeeee;">
     <div class="navbar">
         <div class="navbar-logo">
-            <img src="logo.png" alt="Logo do ConnectPro" class="tamanho-logo">
+            <img src="../IMG/logo.png" alt="Logo do ConnectPro" class="tamanho-logo">
         </div>
         <div class="navbar-menu">
-            <span><a href="PI - Pagina Inicial.html">Início</a></span>
-            <span><a href="PI - Serviços.html">Serviços</a></span>
-            <span><a href="PI - Sobre.html">Sobre</a></span>
+            <span><a href="../PI - Página Inicial/PI - Pagina Inicial.html">Início</a></span>
+            <span><a href="../PI - Serviços/PI - Serviços.html">Serviços</a></span>
+            <span><a href="../PI - Sobre/PI - Sobre.html">Sobre</a></span>
             <span class="fonte-head"><b>Ajuda</b></span>
         </div>
         <div class="navbar-icones">
-            <span><img src="procurar.png" alt="Procurar" class="tamanho-icones"></span>
-            <span><img src="carrinho.png" alt="Carrinho" class="tamanho-icones"></span>
-            <span><a href="PI - Login.html"><img src="login3.png" alt="Login" class="tamanho-icones"></a></span>
+            <span><img src="../IMG/procurar.png" alt="Procurar" class="tamanho-icones"></span>
+            <span><img src="../IMG/carrinho.png" alt="Carrinho" class="tamanho-icones"></span>
+            <span><a href="../PI - Login/PI - Login.html"><img src="../IMG/login3.png" alt="Login" class="tamanho-icones"></a></span>
         </div>
     </div>
 
+    <main class="ajuda-container">
+        <h1 class="ajuda-titulo">Central de Ajuda</h1>
+        <p class="ajuda-subtitulo">Estamos aqui para ajudar você! Encontre respostas ou entre em contato conosco.</p>
+
+        <section class="ajuda-section">
+            <h2 class="ajuda-section-titulo">Perguntas Frequentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-pergunta" onclick="toggleFAQ(this)">
+                    <span>Como faço para contratar um serviço?</span>
+                    <span class="faq-icone">+</span>
+                </div>
+                <div class="faq-resposta">
+                    <p>Navegue pela página de Serviços, escolha o profissional desejado, clique no anúncio e entre em contato através do botão "Entrar em Contato". Você pode negociar diretamente com o prestador ou efetuar o pagamento pelo site.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pergunta" onclick="toggleFAQ(this)">
+                    <span>Como funciona o pagamento?</span>
+                    <span class="faq-icone">+</span>
+                </div>
+                <div class="faq-resposta">
+                    <p>Oferecemos duas opções: pagamento seguro através da plataforma ou negociação direta com o prestador de serviço. Para pagamentos pelo site, aceitamos cartão de crédito, débito e PIX.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pergunta" onclick="toggleFAQ(this)">
+                    <span>Posso anunciar meus serviços na plataforma?</span>
+                    <span class="faq-icone">+</span>
+                </div>
+                <div class="faq-resposta">
+                    <p>Sim! Cadastre-se como prestador de serviços, preencha seu perfil com suas qualificações e comece a anunciar. É simples e rápido!</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pergunta" onclick="toggleFAQ(this)">
+                    <span>Como avalio um serviço contratado?</span>
+                    <span class="faq-icone">+</span>
+                </div>
+                <div class="faq-resposta">
+                    <p>Após a conclusão do serviço, você receberá um convite para avaliar o profissional. Sua avaliação ajuda outros usuários a fazerem escolhas mais informadas.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pergunta" onclick="toggleFAQ(this)">
+                    <span>E se eu tiver problemas com um serviço?</span>
+                    <span class="faq-icone">+</span>
+                </div>
+                <div class="faq-resposta">
+                    <p>Entre em contato com nosso suporte imediatamente. Trabalhamos para mediar conflitos e garantir a satisfação de ambas as partes. Seu feedback é importante para mantermos a qualidade da plataforma.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pergunta" onclick="toggleFAQ(this)">
+                    <span>Como recupero minha senha?</span>
+                    <span class="faq-icone">+</span>
+                </div>
+                <div class="faq-resposta">
+                    <p>Na página de login, clique em "Esqueceu a senha?". Digite seu e-mail cadastrado e enviaremos um link para redefinir sua senha.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="ajuda-section">
+            <h2 class="ajuda-section-titulo">Entre em Contato</h2>
+            <p class="ajuda-texto">Não encontrou o que procurava? Nossa equipe está pronta para ajudar!</p>
+            
+            <div class="contato-info">
+                <div class="contato-item">
+                    <h3>📧 E-mail</h3>
+                    <p><a href="mailto:suporte@connectpro.com.br">suporte@connectpro.com.br</a></p>
+                    <p><a href="mailto:contato@connectpro.com.br">contato@connectpro.com.br</a></p>
+                </div>
+
+                <div class="contato-item">
+                    <h3>📞 Telefone</h3>
+                    <p>(11) 3456-7890</p>
+                    <p>(11) 98765-4321 (WhatsApp)</p>
+                </div>
+
+                <div class="contato-item">
+                    <h3>🕐 Horário de Atendimento</h3>
+                    <p>Segunda a Sexta: 8h às 20h</p>
+                    <p>Sábados: 9h às 15h</p>
+                    <p>Domingos e feriados: Chat online 24h</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="ajuda-section">
+            <h2 class="ajuda-section-titulo">Recursos Úteis</h2>
+            <div class="recursos-grid">
+                <div class="recurso-card">
+                    <h3>Guia do Comprador</h3>
+                    <p>Aprenda a escolher o melhor profissional e garantir um serviço de qualidade.</p>
+                </div>
+                <div class="recurso-card">
+                    <h3>Guia do Prestador</h3>
+                    <p>Dicas para criar um perfil atrativo e conquistar mais clientes.</p>
+                </div>
+                <div class="recurso-card">
+                    <h3>Políticas de Segurança</h3>
+                    <p>Conheça nossas medidas para proteger suas transações e dados.</p>
+                </div>
+                <div class="recurso-card">
+                    <h3>Blog ConnectPro</h3>
+                    <p>Artigos, tendências e novidades do mercado de serviços.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <footer>
         <div style="padding-left: 50px;">
-            <img src="logoalt.png" alt="Logo Alternativo"><br><br>
+            <img src="../IMG/logoalt.png" alt="Logo Alternativo"><br><br>
             <div class="social-logos">
-                <a href="https://www.instagram.com/" target="_blank"><img src="instagram.png" alt="Logo Instagram"></a>
-                <a href="https://www.facebook.com/?locale=pt_BR" target="_blank"><img src="facebook.png" alt="Logo Facebook"></a>
-                <a href="https://x.com/?lang=pt" target="_blank"><img src="twitter.png" alt="Logo Twitter"></a>
-                <a href="https://br.linkedin.com/" target="_blank"><img src="linkedin.png" alt="Logo LinkedIn"></a>
+                <a href="https://www.instagram.com/" target="_blank"><img src="../IMG/instagram.png" alt="Logo Instagram"></a>
+                <a href="https://www.facebook.com/?locale=pt_BR" target="_blank"><img src="../IMG/facebook.png" alt="Logo Facebook"></a>
+                <a href="https://x.com/?lang=pt" target="_blank"><img src="../IMG/twitter.png" alt="Logo Twitter"></a>
+                <a href="https://br.linkedin.com/" target="_blank"><img src="../IMG/linkedin.png" alt="Logo LinkedIn"></a>
             </div>
         </div>
         <div class="foot-menu">
@@ -69,5 +187,35 @@
             </span>
         </div>
     </footer>
+
+    <script>
+        // Função para abrir e fechar as perguntas do FAQ
+        function toggleFAQ(elemento) {
+            // Pega o item FAQ pai
+            const faqItem = elemento.parentElement;
+            
+            // Pega a resposta (próximo elemento após a pergunta)
+            const resposta = elemento.nextElementSibling;
+            
+            // Pega o ícone + ou -
+            const icone = elemento.querySelector('.faq-icone');
+            
+            // Verifica se está aberto ou fechado
+            const estaAberto = faqItem.classList.contains('faq-aberto');
+            
+            // Se estiver aberto, fecha
+            if (estaAberto) {
+                faqItem.classList.remove('faq-aberto');
+                icone.textContent = '+';
+            } 
+            // Se estiver fechado, abre
+            else {
+                faqItem.classList.add('faq-aberto');
+                icone.textContent = '−';
+            }
+        }
+    </script>
+
+    <script src="../JS/script.js"></script>
 </body>
 </html>
