@@ -298,7 +298,7 @@ footer
 /*CORPO e SERVIÇO*/
 .retangulo 
 {
-    background: #adadad;
+    background: var(--verde-primario);
     border-radius: 8px;
     padding: 18px;
     margin: 0 auto 25px auto;
@@ -464,15 +464,7 @@ footer
   font-size: 0.85rem;
 }
 
-/* (removido) placeholders antigos do shimmer para 'Mais Visitados' */
 
-@media (max-width: 480px) {
-  .grid .card img,
-  .grid img {
-    height: 120px;
-  }
-  .menu-lateral { height: auto; }
-}
 /*CORPO e SERVIÇO*/
 
 /*LOGIN*/
