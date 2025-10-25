@@ -144,6 +144,18 @@ footer
     line-height: 1.75;
     color:#07484A;
 }
+.foot-menu a
+{
+    text-decoration: none;
+    color:#07484A;
+    cursor: pointer;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+.foot-menu a:hover
+{
+    color: #0a6a6d;
+    text-decoration: underline;
+}
 /*FOOTER*/
 
 /*CORPO*/
