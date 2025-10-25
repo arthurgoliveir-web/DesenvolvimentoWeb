@@ -323,6 +323,24 @@ footer
     border-radius: 10px;
     margin-left: 10px;
 }
+/* Botão de atalho para Mais Visitados */
+.link-mais-visitados {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    background: #ffffff;
+    color: #07484A;
+    border: 1px solid #07484A;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+.link-mais-visitados:hover {
+    background: #07484A;
+    color: #ffffff;
+}
 .menu-lateral ul 
 {
     list-style: none;
@@ -445,6 +463,8 @@ footer
   color: #5b6a6a;
   font-size: 0.85rem;
 }
+
+/* (removido) placeholders antigos do shimmer para 'Mais Visitados' */
 
 @media (max-width: 480px) {
   .grid .card img,
@@ -660,25 +680,36 @@ footer
 }
 
 /* Container principal da página de detalhe */
+/*Enzo: Eu fiz algumas modificações pra deixar mais visualmente bonito e outras coisas*/
 main#detalhe {
-    max-width: 900px; 
+    max-width: 1100px; 
     margin: 30px auto; 
-    padding: 30px 40px; 
-    background-color: #eeeeee; 
-    border-radius: 15px; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.10);
+    padding: 32px 40px; 
+    background-color: #ffffff; 
+    border-radius: 18px; 
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
     padding-bottom: 30px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-areas:
+        'title title'
+        'image price'
+        'image desc'
+        'image rating'
+        'image button';
+    gap: 18px 28px;
 }
 
 /* Título do Serviço */
 main#detalhe h1#titulo {
     font-family: 'Open Sans', sans-serif;
     color: #07484A; 
-    font-size: 2.8em; 
+    font-size: 2.4em; 
     font-weight:bold;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 25px;
+    grid-area: title;
 }
 
 /* Imagem do Serviço */
@@ -688,22 +719,29 @@ main#detalhe img#imagem {
     margin-right: auto;   
     
     width: 100%;
-    max-width: 600px;     
+    max-width: 620px;     
 
     height: auto; 
-    border-radius: 8px;
+    border-radius: 12px;
     margin-bottom: 25px;
     border: 1px solid #eee; 
+    grid-area: image;
 }
 
 /* Preço */
-main#detalhe p#preco {
+main#detalhe p#preco {  /*cingo: mudei um pouco pra deixar mais bonito*/
     font-family:'Times New Roman', Times, serif; 
-    font-size: 1.6em; 
+    font-size: 1.4em; 
     font-weight: bold;
-    color: #333;
+    color: #07484A;
     margin-bottom: 15px;
     text-align: left;
+    grid-area: price;
+    background: #E7F1F1;
+    border: 1px solid #D3E6E6;
+    padding: 10px 14px;
+    border-radius: 10px;
+    display: inline-block;
 }
 
 /* Descrição */
@@ -713,13 +751,14 @@ main#detalhe p#descricao {
     line-height: 1.7; 
     margin-bottom: 10px;
     text-align: left;
-    color: #333;
+    color: #424242;
+    grid-area: desc;
 }
 
 /* Botão de Contato */
 main#detalhe button#btn-contato {
     display: inline-block;
-    background-color: #00796b; 
+    background-color: #07484A; 
     color: #ffffff; 
     font-size: 1.1em;
     font-weight: 500;
@@ -727,9 +766,10 @@ main#detalhe button#btn-contato {
     text-align: center;
     padding: 12px 28px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    grid-area: button;
 }
 
 /* Estrelas */
@@ -739,6 +779,7 @@ main#detalhe button#btn-contato {
   color: #ccc;
   cursor: pointer;
   user-select: none;
+    grid-area: rating;
 }
 .estrela {
   transition: color 0.2s;
@@ -752,11 +793,29 @@ main#detalhe button#btn-contato {
 }
 
 main#detalhe button#btn-contato:hover {
-    background-color: #07484A; 
+    background-color: #0a5f62; 
+    transform: translateY(-1px) scale(1.02);
 }
 
 .bg-molde {
     background-color:#c0c0c0;
+}
+/* Responsivo para a página de detalhes */
+/*cingo: isso faz o layout mudar em telas menores, percebi que tava quebrando quando mudava de tamanho*/
+@media (max-width: 900px) {
+    main#detalhe {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'title'
+            'image'
+            'price'
+            'desc'
+            'rating'
+            'button';
+        padding: 24px;
+    }
+    main#detalhe h1#titulo { font-size: 1.9em; }
+    .estrelas { font-size: 1.6rem; }
 }
 /* Estilos para a página de modelos de serviços*/
 
