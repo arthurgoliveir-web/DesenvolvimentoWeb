@@ -1,7 +1,7 @@
 :root {
+    /* Paleta base do tema */
     --verde-primario: #07484A;
     --fundo-footer: #F3F6F5;
-
 }
 
 /* Animação de slide para transição de páginas */
@@ -466,6 +466,47 @@ footer
 
 
 /*CORPO e SERVIÇO*/
+
+/* CARRINHO */
+.carrinho-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px 40px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+}
+.carrinho-titulo {
+    font-family: 'Open Sans', sans-serif;
+    color: #07484A;
+    text-align: center;
+    margin: 0 0 16px 0;
+}
+.carrinho-vazio {
+    background: #F3F6F5;
+    border: 1px solid #E3EDEC;
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+    color: #455a5a;
+}
+.carrinho-acoes { 
+    margin-top: 18px; 
+    display: flex; 
+    gap: 12px; 
+    justify-content: center; 
+}
+.btn { 
+    text-decoration: none; 
+    padding: 10px 18px; 
+    border-radius: 10px; 
+    font-family: 'Open Sans', sans-serif; 
+    font-weight: 600; 
+}
+.btn.primario { background: #07484A; color: #fff; }
+.btn.primario:hover { background: #0a5f62; }
+.btn.secundario { background: #eaf2f2; color: #07484A; border: 1px solid #cde1e1; }
+.btn.secundario:hover { background: #dfeeee; }
 
 /*LOGIN*/
 .login-bg 
