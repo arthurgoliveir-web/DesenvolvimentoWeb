@@ -1,7 +1,7 @@
 :root {
     /* Paleta base do tema */
     --verde-primario: #07484A;
-    --fundo-footer: #F3F6F5;
+    --fundo-footer: #f2f5f4;
 }
 
 /* Animação de slide para transição de páginas */
@@ -1190,3 +1190,134 @@ main#detalhe button#btn-contato:hover {
     }
 }
 /*AJUDA*/
+
+/*MEUS PEDIDOS*/
+    /* Principal */
+    .pedidos-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      min-height: 60vh;
+    }
+
+    .titulo-pagina {
+      color: #07484A;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 15px;
+    }
+
+    /* Estilo do Card de Pedido */
+    .pedido-card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+    }
+
+    .pedido-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Imagem do serviço no card */
+    .pedido-img {
+      width: 120px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    /* Informações do Texto */
+    .pedido-info {
+      flex: 1; /* Ocupa o espaço central */
+    }
+
+    .pedido-titulo {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.2rem;
+      color: #07484A;
+      margin: 0 0 5px 0;
+      font-weight: bold;
+    }
+
+    .pedido-detalhe {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    /* Badges de Status (Etiquetas Coloridas) */
+    .status-badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .status-ativo { background-color: #e3f2fd; color: #1565c0; } /* Azul */
+    .status-concluido { background-color: #e8f5e9; color: #2e7d32; } /* Verde */
+    .status-pendente { background-color: #fff3e0; color: #ef6c00; } /* Laranja */
+
+    /* Botões de Ação à direita */
+    .pedido-acoes {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 140px;
+    }
+
+    .btn-acao {
+      padding: 8px 15px;
+      border-radius: 6px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: bold;
+      font-family: 'Open Sans', sans-serif;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-detalhes {
+      background-color: #07484A;
+      color: white;
+    }
+    .btn-detalhes:hover { background-color: #053638; }
+
+    .btn-contato {
+      background-color: white;
+      border: 1px solid #07484A;
+      color: #07484A;
+    }
+    .btn-contato:hover { background-color: #f0faff; }
+
+    /* Responsividade para Celular */
+    @media (max-width: 600px) {
+      .pedido-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      .pedido-img {
+        width: 100%;
+        height: 150px;
+      }
+      .pedido-acoes {
+        width: 100%;
+        flex-direction: row;
+      }
+      .btn-acao {
+        flex: 1;
+      }
+    }
