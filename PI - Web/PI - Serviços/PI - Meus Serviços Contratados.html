@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ConnectPro - Meus Pedidos</title>
+  <link rel="stylesheet" href="../CSS/estilos.css">
+</head>
+
+<body body class="bg-molde">
+  
+  <header class="navbar">
+    <div class="navbar-logo">
+      <img src="../IMG/logo.png" alt="Logo do ConnectPro" class="tamanho-logo">
+    </div>
+    <div class="navbar-menu">
+      <span><a href="../PI - Página Inicial/PI - Pagina Inicial.html">Início</a></span>
+      <span><a href="../PI - Serviços/PI - Serviços.html">Serviços</a></span>
+      <span><a href="../PI - Sobre/PI - Sobre.html">Sobre</a></span>
+      <span><a href="../PI - Ajuda/PI - Ajuda.html">Ajuda</a></span>
+    </div>
+    <div class="navbar-icones">
+      <span><img src="../IMG/procurar.png" alt="Procurar" class="tamanho-icones"></span>
+      <span><a href="../PI - Carrinho/PI - Carrinho.html"><img src="../IMG/carrinho.png" alt="Carrinho" class="tamanho-icones"></a></span>
+      <span><a href="../PI - Login/PI - Login.html"><img src="../IMG/login3.png" alt="Login" class="tamanho-icones"></a></span>
+    </div>
+  </header>
+
+  <main class="pedidos-container">
+    <h1 class="meio-titulo-serviços">Meus Serviços Contratados</h1>
+
+    <div class="pedido-card">
+      <img src="../IMG/jardinagem 1.webp" alt="Jardinagem" class="pedido-img">
+      
+      <div class="pedido-info">
+        <h3 class="pedido-titulo">Jardinagem e Paisagismo</h3>
+        <p class="pedido-detalhe">Prestador: <strong>Carlos Jardins</strong></p>
+        <p class="pedido-detalhe">Data: 20/10/2025</p>
+        <span class="status-badge status-ativo">● Em Andamento</span>
+      </div>
+
+      <div class="pedido-acoes">
+        <button class="btn-acao btn-detalhes" onclick="alert('Abrir chat com Carlos...')">💬 Chat</button>
+        <button class="btn-acao btn-contato">Detalhes</button>
+      </div>
+    </div>
+
+    <div class="pedido-card">
+      <img src="../IMG/programa-2.jpg" alt="Dev Web" class="pedido-img">
+      
+      <div class="pedido-info">
+        <h3 class="pedido-titulo">Desenvolvimento Web Avançado</h3>
+        <p class="pedido-detalhe">Prestador: <strong>Lucas Silva</strong></p>
+        <p class="pedido-detalhe">Valor: R$ 450,00</p>
+        <span class="status-badge status-pendente">● Aguardando Confirmação</span>
+      </div>
+
+      <div class="pedido-acoes">
+        <button class="btn-acao btn-detalhes">Ver Pedido</button>
+        <button class="btn-acao btn-contato" style="color: red; border-color: red;">Cancelar</button>
+      </div>
+    </div>
+
+    <div class="pedido-card" style="opacity: 0.8;">
+      <img src="../IMG/Design Grafico 1.jpg" alt="Design" class="pedido-img">
+      
+      <div class="pedido-info">
+        <h3 class="pedido-titulo">Criação de Logo</h3>
+        <p class="pedido-detalhe">Prestador: <strong>Ana Design</strong></p>
+        <p class="pedido-detalhe">Entregue em: 15/10/2025</p>
+        <span class="status-badge status-concluido">✔ Concluído</span>
+      </div>
+
+      <div class="pedido-acoes">
+        <button class="btn-acao btn-detalhes" onclick="alert('Abrir modal de avaliação...')">★ Avaliar</button>
+        <button class
