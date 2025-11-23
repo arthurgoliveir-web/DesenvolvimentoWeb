@@ -21,7 +21,7 @@
         <div class="navbar-icones">
             <span><img src="../IMG/procurar.png" alt="Procurar" class="tamanho-icones"></span> <!-- icone procurar-->
             <span><a href="../PI - Carrinho/PI - Carrinho.html"><img src="../IMG/carrinho.png" alt="Carrinho" class="tamanho-icones"></a></span>
-            <span><a href="PI - Login.html"><img src="../IMG/login3.png" alt="Login" class="tamanho-icones"></a></span>
+            <span><a href="PI - Login.html"><img src="../IMG/login3.png" alt="Login" class="tamanho-icones icone-ativo"></a></span>
         </div>
     </div>
 
@@ -90,5 +90,22 @@
         </div>
     </footer>
     <script src="../JS/script.js"></script>
+    <script>
+        // Redireciona se já estiver logado
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                // Verifica se tem redirect na URL
+                const params = new URLSearchParams(window.location.search);
+                const redirect = params.get('redirect');
+                
+                if (redirect === 'checkout') {
+                    window.location.href = '../PI - Checkout/PI - Checkout.html';
+                } else {
+                    window.location.href = 'PI - Area Logada.html';
+                }
+            }
+        });
+    </script>
 </body>
 </html>
