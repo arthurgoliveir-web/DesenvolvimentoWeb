@@ -928,31 +928,132 @@ function selecionarPagamento(elemento, metodo) {
         formCartao.style.display = 'none';
     }
 }
-
+//Validação do corrinho com meus pedidos
 function confirmarPedido() {
-    // Validação básica
+
     var nome = document.getElementById('nome').value;
-    var email = document.getElementById('email').value;
+    var emailInput = document.getElementById('email').value;
     var endereco = document.getElementById('endereco').value;
 
-    if (!nome || !email || !endereco) {
+    if (!nome || !emailInput || !endereco) {
         alert('Por favor, preencha todos os campos obrigatórios.');
         return;
     }
 
-    alert('Pedido confirmado com sucesso, ' + nome + '!\nEnviaremos os detalhes para ' + email + '.');
-    
-    // Limpa o carrinho do usuário e redireciona
     var userEmail = localStorage.getItem('email');
-    if (userEmail) {
-        localStorage.removeItem('carrinho_' + userEmail);
-    } else {
-        localStorage.removeItem('carrinho');
+    if (!userEmail) {
+        alert("Erro: Usuário não identificado.");
+        return;
     }
-    
-    window.location.href = '../PI - Página Inicial/PI - Pagina Inicial.html';
+
+    var carrinho = obterCarrinho();
+    if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio.");
+        return;
+    }
+
+    var pedidosAntigos = JSON.parse(localStorage.getItem("meus_pedidos_contratados")) || [];
+
+    var novosPedidos = carrinho.map(function(item) {
+        return {
+            titulo: item.titulo,
+  
+            prestador: item.prestador || "ConnectPro Parceiro", 
+            valor: "R$ " + item.valor.toFixed(2).replace('.', ','),
+            imagem: item.imagem,
+            status: "Em Andamento", 
+            data: new Date().toLocaleDateString()
+        };
+    });
+
+    var listaAtualizada = pedidosAntigos.concat(novosPedidos);
+
+    localStorage.setItem("meus_pedidos_contratados", JSON.stringify(listaAtualizada));
+
+    localStorage.removeItem('carrinho_' + userEmail);
+
+    alert('Pedido confirmado com sucesso! Você pode acompanhá-lo em "Meus Pedidos".');
+
+    window.location.href = '../PI - Serviços/PI - Meus Serviços Contratados.html'; 
 }
-window.selecionarPagamento = selecionarPagamento;
-window.confirmarPedido = confirmarPedido;
 
+// ============================================================
+// === LÓGICA DA PÁGINA "MEUS SERVIÇOS CONTRATADOS" (NOVO) ===
+// ============================================================
 
+document.addEventListener("DOMContentLoaded", function() {
+    carregarPedidosNaTela();
+});
+
+function carregarPedidosNaTela() {
+    const container = document.getElementById("lista-pedidos");
+    
+    // IMPORTANTE: Se não estiver na página de pedidos, para aqui e não faz nada.
+    // Isso evita erros nas outras páginas (Home, Login, etc).
+    if (!container) return;
+
+    const pedidos = JSON.parse(localStorage.getItem("meus_pedidos_contratados")) || [];
+    
+    // Mantém o título "Serviços Contratados" (classe retangulo) se existir
+    const tituloRetangulo = container.querySelector('.retangulo');
+    container.innerHTML = ""; 
+    if(tituloRetangulo) container.appendChild(tituloRetangulo);
+
+    // Se a lista estiver vazia
+    if (pedidos.length === 0) {
+        container.innerHTML += `
+            <div style="text-align: center; padding: 40px; color: #666; background: white; border-radius: 8px; margin-top: 20px;">
+                <h3>Você ainda não tem serviços contratados.</h3>
+                <br>
+                <a href="../PI - Serviços/PI - Serviços.html" style="background: #07484A; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Explorar Serviços</a>
+            </div>
+        `;
+        return;
+    }
+
+    // Desenha os cards
+    pedidos.forEach((pedido, index) => {
+        let classeStatus = "status-pendente";
+        let iconeStatus = "●";
+        
+        if(pedido.status === "Em Andamento") { classeStatus = "status-ativo"; iconeStatus = "●"; }
+        if(pedido.status === "Concluído") { classeStatus = "status-concluido"; iconeStatus = "✔"; }
+
+        const htmlCard = `
+        <div class="pedido-card">
+            <img src="${pedido.imagem}" alt="${pedido.titulo}" class="pedido-img">
+            
+            <div class="pedido-info">
+                <h3 class="pedido-titulo">${pedido.titulo}</h3>
+                <p class="pedido-detalhe">Prestador: <strong>${pedido.prestador}</strong></p>
+                <p class="pedido-detalhe">Valor: ${pedido.valor}</p>
+                <p class="pedido-detalhe" style="font-size: 0.8rem; margin-top: 5px; color: #888;">Contratado em: ${pedido.data}</p>
+                <span class="status-badge ${classeStatus}">${iconeStatus} ${pedido.status}</span>
+            </div>
+
+            <div class="pedido-acoes">
+                <button class="btn-acao btn-detalhes" onclick="alert('Abrindo chat com ${pedido.prestador}...')">💬 Chat</button>
+                
+                ${(pedido.status === 'Pendente' || pedido.status === 'Em Andamento') ? 
+                    `<button class="btn-acao btn-cancelar" onclick="cancelarPedido(${index})">Cancelar Serviço</button>` : ''}
+                
+                ${pedido.status === 'Concluído' ? 
+                    `<button class="btn-acao btn-contato" onclick="alert('Redirecionando...')">Contratar Novamente</button>` : ''}
+            </div>
+        </div>
+        `;
+        
+        container.innerHTML += htmlCard;
+    });
+}
+
+function cancelarPedido(index) {
+    if(confirm("Tem certeza que deseja cancelar este serviço?")) {
+        let pedidos = JSON.parse(localStorage.getItem("meus_pedidos_contratados")) || [];
+        pedidos.splice(index, 1); // Remove o item da lista
+        localStorage.setItem("meus_pedidos_contratados", JSON.stringify(pedidos)); // Salva nova lista
+        carregarPedidosNaTela(); // Recarrega a visualização
+    }
+}
+// Torna a função acessível para o botão HTML onclick="cancelarPedido(...)"
+window.cancelarPedido = cancelarPedido;D
