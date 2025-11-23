@@ -1368,7 +1368,6 @@ main#detalhe button#btn-contato:hover {
         grid-template-columns: 1fr;
     }
 }
-/*<<<<<<<*/ HEAD
 /*AJUDA*/
 
 /*MEUS PEDIDOS*/
@@ -1501,7 +1500,6 @@ main#detalhe button#btn-contato:hover {
         flex: 1;
       }
     }
-/*=======*/
 
 /* CHECKOUT */
 .checkout-container {
@@ -1680,4 +1678,3 @@ main#detalhe button#btn-contato:hover {
         position: static;
     }
 }
-/*>>>>>>> ff58b2cfc0c58b7d578a7559108edcc911cc23c8*/
