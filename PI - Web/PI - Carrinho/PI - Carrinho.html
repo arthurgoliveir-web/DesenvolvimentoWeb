@@ -14,13 +14,13 @@
     </div>
     <div class="navbar-menu">
       <span><a href="../PI - Página Inicial/PI - Pagina Inicial.html">Início</a></span>
-      <span class="fonte-head"><b>Serviços</b></span>
+      <span><a href="../PI - Serviços/PI - Serviços.html">Serviços</a></span>
       <span><a href="../PI - Sobre/PI - Sobre.html">Sobre</a></span>
       <span><a href="../PI - Ajuda/PI - Ajuda.html">Ajuda</a></span>
     </div>
     <div class="navbar-icones">
       <span><img src="../IMG/procurar.png" alt="Procurar" class="tamanho-icones"></span>
-      <span><a href="./PI - Carrinho.html"><img src="../IMG/carrinho.png" alt="Carrinho" class="tamanho-icones"></a></span>
+      <span><a href="./PI - Carrinho.html"><img src="../IMG/carrinho.png" alt="Carrinho" class="tamanho-icones icone-ativo"></a></span>
       <span><a href="../PI - Login/PI - Login.html"><img src="../IMG/login3.png" alt="Login" class="tamanho-icones"></a></span>
     </div>
   </div>
@@ -28,9 +28,25 @@
   <main class="carrinho-container">
     <h1 class="carrinho-titulo">Seu Carrinho</h1>
 
-    <section class="carrinho-vazio">
+    <section class="carrinho-vazio" id="carrinho-vazio">
       <p>Seu carrinho está vazio.</p>
       <p>Explore serviços e adicione itens para visualizar aqui.</p>
+    </section>
+
+    <section class="carrinho-lista" id="carrinho-lista" style="display:none;">
+      <!-- Itens do carrinho serão inseridos aqui via JS -->
+    </section>
+
+    <section class="carrinho-resumo" id="carrinho-resumo" style="display:none;">
+      <div class="resumo-linha">
+        <span>Subtotal:</span>
+        <span id="subtotal">R$ 0,00</span>
+      </div>
+      <div class="resumo-linha total">
+        <span>Total:</span>
+        <span id="total">R$ 0,00</span>
+      </div>
+      <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
     </section>
 
     <div class="carrinho-acoes">
@@ -50,6 +66,7 @@
       </div>
     </div>
   </footer>
+  
   <script src="../JS/script.js"></script>
 </body>
 </html>
