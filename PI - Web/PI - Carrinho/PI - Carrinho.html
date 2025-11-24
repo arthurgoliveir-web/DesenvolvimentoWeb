@@ -8,24 +8,22 @@
   <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
 </head>
 <body style="background-color: #eeeeee;">
-  <div class="navbar">
-    <div class="navbar-logo">
-      <img src="../IMG/logo.png" alt="Logo do ConnectPro" class="tamanho-logo">
-    </div>
-    <div class="navbar-menu">
-      <span><a href="../PI - Página Inicial/PI - Pagina Inicial.html">Início</a></span>
-      <span><a href="../PI - Serviços/PI - Serviços.html">Serviços</a></span>
-      <span><a href="../PI - Sobre/PI - Sobre.html">Sobre</a></span>
-      <span><a href="../PI - Ajuda/PI - Ajuda.html">Ajuda</a></span>
-    </div>
-    <div class="navbar-icones">
-      <span><img src="../IMG/procurar.png" alt="Procurar" class="tamanho-icones"></span>
-      <span><a href="./PI - Carrinho.html"><img src="../IMG/carrinho.png" alt="Carrinho" class="tamanho-icones icone-ativo"></a></span>
-      <span><a href="../PI - Login/PI - Login.html"><img src="../IMG/login3.png" alt="Login" class="tamanho-icones"></a></span>
-    </div>
-  </div>
-
-  <main class="carrinho-container">
+    <header class="navbar">
+        <figure class="navbar-logo">
+            <img src="../IMG/logo.png" alt="Logo do ConnectPro" class="tamanho-logo">
+        </figure>
+        <nav class="navbar-menu">
+            <span><a href="../PI - Página Inicial/PI - Pagina Inicial.html">Início</a></span>
+            <span><a href="../PI - Serviços/PI - Serviços.html">Serviços</a></span>
+            <span><a href="../PI - Sobre/PI - Sobre.html">Sobre</a></span>
+            <span><a href="../PI - Ajuda/PI - Ajuda.html">Ajuda</a></span>
+        </nav>
+        <nav class="navbar-icones">
+            <span><img src="../IMG/procurar.png" alt="Procurar" class="tamanho-icones"></span>
+            <span><a href="./PI - Carrinho.html"><img src="../IMG/carrinho.png" alt="Carrinho" class="tamanho-icones icone-ativo"></a></span>
+            <span><a href="../PI - Login/PI - Login.html"><img src="../IMG/login3.png" alt="Login" class="tamanho-icones"></a></span>
+        </nav>
+    </header>  <main class="carrinho-container">
     <h1 class="carrinho-titulo">Seu Carrinho</h1>
 
     <section class="carrinho-vazio" id="carrinho-vazio">
@@ -38,33 +36,33 @@
     </section>
 
     <section class="carrinho-resumo" id="carrinho-resumo" style="display:none;">
-      <div class="resumo-linha">
+      <p class="resumo-linha">
         <span>Subtotal:</span>
         <span id="subtotal">R$ 0,00</span>
-      </div>
-      <div class="resumo-linha total">
+      </p>
+      <p class="resumo-linha total">
         <span>Total:</span>
         <span id="total">R$ 0,00</span>
-      </div>
+      </p>
       <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
     </section>
 
-    <div class="carrinho-acoes">
+    <nav class="carrinho-acoes">
       <a class="btn primario" href="../PI - Serviços/PI - Serviços.html">Explorar Serviços</a>
       <a class="btn secundario" href="../PI - Página Inicial/PI - Pagina Inicial.html">Voltar ao Início</a>
-    </div>
+    </nav>
   </main>
 
   <footer>
-    <div style="padding-left: 20px; padding-right: 20px;">
+    <section style="padding-left: 20px; padding-right: 20px;">
       <img src="../IMG/logoalt.png" alt="Logo Alternativo"><br><br>
-      <div class="social-logos">
+      <nav class="social-logos">
         <a href="https://www.instagram.com/" target="_blank"><img src="../IMG/instagram.png" alt="Logo Instagram"></a>
         <a href="https://www.facebook.com/?locale=pt_BR" target="_blank"><img src="../IMG/facebook.png" alt="Logo Facebook"></a>
         <a href="https://x.com/?lang=pt" target="_blank"><img src="../IMG/twitter.png" alt="Logo Twitter"></a>
         <a href="https://br.linkedin.com/" target="_blank"><img src="../IMG/linkedin.png" alt="Logo LinkedIn"></a>
-      </div>
-    </div>
+      </nav>
+    </section>
   </footer>
   
   <script src="../JS/script.js"></script>
