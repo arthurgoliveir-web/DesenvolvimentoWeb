@@ -1,37 +1,49 @@
-// Animação de fade-in da imagem de fundo sempre que a página carrega
-// Deu muita merda aqui, se tiver algo errado é por causa disso, mas deve ta funcionando agora
-//Eu não entendo totalmente esse codigo, eu usei um pouco de ai e outras coisas, mas ta funcionando
-//Tem muitas coisas tecnicas e sobre desempenho pra fazer uma animação suave na imagem do fundo
-//Mas eu não manjo muito disso ainda, então fiz o que deu pra fazer, se quiser melhorar é melhor fazer do começo
+
+// ANIMAÇÃO DO FUNDO DA VITRINE
+
+// Quando a página carrega, faz a imagem de fundo aparecer suavemente
 document.addEventListener('DOMContentLoaded', function() {
     const container = document.querySelector('.fundo-vitrine');
     const bg = container ? container.querySelector('.bg-vitrine') : null;
     if (!container || !bg) return;
 
+    // Tira a classe pra poder adicionar de novo com efeito
     container.classList.remove('loaded');
 
     const show = () => container.classList.add('loaded');
 
+    // Se a imagem ja carregou, mostra na hora
     if (bg.complete && bg.naturalWidth > 0) {
- 
         requestAnimationFrame(show);
     } else {
-
+        // Se não carregou ainda, espera carregar
         bg.addEventListener('load', show, { once: true });
-
+        // Plano B: se demorar demais, mostra depois de 1.5s
         setTimeout(show, 1500);
     }
 });
 
+
+// TIRAR ACENTOS
+
+// Transforma "programação" em "programacao" pra facilitar buscas
 function removerAcentos(str)
 {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+
+// MENU DE CATEGORIAS (SIDEBAR)
+
+// Quando clica numa categoria no menu lateral, mostra só ela
 function mostrarCategoria(id)
 {
+    // Esconde todas as categorias
     document.querySelectorAll('.categoria').forEach(cat => {cat.classList.remove('active')});
+    // Mostra só a que foi clicada
     document.getElementById(id).classList.add('active');
+    
+    // Destaca o item clicado no menu lateral
     document.querySelectorAll('.menu-lateral li').forEach(li => {
         li.classList.remove('ativo');
         if (
@@ -41,9 +53,11 @@ function mostrarCategoria(id)
             li.classList.add('ativo');
         }
     })
-
 }
-// validação do login
+
+// VALIDAÇÃO DO FORMULÁRIO DE LOGIN
+
+// Verifica se email e senha são válidos antes de enviar
 document.addEventListener("DOMContentLoaded", function() {
 
     const form = document.querySelector("form");
@@ -52,15 +66,18 @@ document.addEventListener("DOMContentLoaded", function() {
     const senhaInput = document.getElementById("senha");
     const hintSenha = document.getElementById("hint-senha");
 
-    // Verifica se os elementos existem antes de usar
+    // Se não tiver formulário na página, nem tenta rodar
     if (!form || !emailInput || !senhaInput) return;
 
+    // Regex pra checar se email tem formato certo (algo@algo.algo)
     const reMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     const vMail = (valor) => reMail.test(valor.trim());
 
+    // Senha precisa ter pelo menos 6 caracteres
     const reSenha = /.{6,}/;
     const vSenha = (valor) => reSenha.test(valor);
 
+    // Mostra erro se email for inválido
     function validarEmail() {
         const emailValido = vMail(emailInput.value);
         if (!emailValido) {
@@ -76,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return emailValido;
     }
 
+    // Mostra erro se senha for muito curta
     function validarSenha() {
         const senhaValida = vSenha(senhaInput.value);
         if (!senhaValida) {
@@ -91,9 +109,11 @@ document.addEventListener("DOMContentLoaded", function() {
         return senhaValida;
     }
 
+    // Valida em tempo real enquanto digita
     emailInput.addEventListener("input", validarEmail);
     senhaInput.addEventListener("input", validarSenha);
 
+    // Bloqueia envio se tiver erro
     form.addEventListener("submit", function(e) {
         const emailEstaOk = validarEmail();
         const senhaEstaOk = validarSenha();
@@ -105,25 +125,36 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// Barra de procura na sidebar
+
+// BARRA DE BUSCA NA SIDEBAR
+
+// Permite pesquisar categorias digitando na barra lateral
 document.addEventListener('DOMContentLoaded', function() {
     const busca = document.getElementById('busca-categorias');
     const lista = document.getElementById('lista-categorias');
     const sugestoes = document.getElementById('sugestoes-categoria');
     
-    // Verifica se os elementos existem antes de usar
+    // Se não tiver esses elementos, não faz nada
     if (!busca || !lista || !sugestoes) return;
     
+    // Pega o nome de todas as categorias da lista
     const categorias = Array.from(lista.children).map(li => li.textContent.trim());
 
+    // Quando digita, filtra e mostra sugestões
     busca.addEventListener('input', function() {
         const termo = removerAcentos(busca.value.trim().toLowerCase());
         sugestoes.innerHTML = '';
+        
+        // Se não digitou nada, esconde sugestões
         if (termo.length === 0) {
             sugestoes.style.display = 'none';
             return;
         }
+        
+        // Filtra categorias que batem com o que digitou
         const filtradas = categorias.filter(cat => removerAcentos(cat.toLowerCase()).includes(termo));
+        
+        // Mostra as sugestões encontradas
         if (filtradas.length > 0) {
             sugestoes.style.display = 'block';
             filtradas.forEach(cat => {
@@ -134,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 div.style.border = '1px solid #c4c4c4';
                 div.style.padding = '6px 10px';
                 div.style.marginBottom = '2px';
+                // Quando clica na sugestão, abre a categoria
                 div.onclick = function() {
                     busca.value = cat;
                     sugestoes.innerHTML = '';
@@ -147,6 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Se apertar Enter, abre a categoria
     busca.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
             abrirCategoria(busca.value.trim());
@@ -155,6 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Encontra a categoria na lista e clica nela
     function abrirCategoria(nome) {
         const nomeSemAcento = removerAcentos(nome.toLowerCase());
         lista.querySelectorAll('li').forEach(li => {
@@ -165,7 +199,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-//Cadastro e Login com token
+
+// SISTEMA DE AUTENTICAÇÃO (LOGIN/CADASTRO)
+
+
+// Cria um token fake pra simular autenticação (não é seguro pra produção!)
 function gerarToken(usuario) {
     const header = btoa(JSON.stringify({ alg: "HS256", typ: "JWT" }));
     const payload = btoa(JSON.stringify({ user: usuario, exp: Date.now() + 60000}));
@@ -173,6 +211,7 @@ function gerarToken(usuario) {
     return `${header}.${payload}.${signature}`;
 }
 
+// Cadastra um novo usuário no localStorage
 function cadastrar() {
     const emailElem = document.getElementById("emailC");
     const usernameElem = document.getElementById("usernameC");
@@ -182,12 +221,17 @@ function cadastrar() {
     const username = usernameElem ? usernameElem.value.trim() : "";
     const pass = senhaElem ? senhaElem.value.trim() : "";
 
+    // Verifica se preencheu tudo
     if (!email || !username || !pass) return alert("Preencha todos os campos!");
 
+    // Valida formato do email
     const reMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     if (!reMail.test(email)) return alert("Digite um e-mail válido.");
+    
+    // Verifica se já existe conta com esse email
     if (localStorage.getItem("account_" + email)) return alert("Já existe uma conta com esse e-mail!");
 
+    // Salva a conta no localStorage
     const account = { username: username, password: pass };
     localStorage.setItem("account_" + email, JSON.stringify(account));
 
@@ -196,6 +240,7 @@ function cadastrar() {
 }
 window.cadastrar = cadastrar;
 
+// Faz login do usuário
 function logar() {
     const emailElem = document.getElementById("email");
     const senhaElem = document.getElementById("senha");
@@ -204,6 +249,7 @@ function logar() {
 
     if (!email || !pass) return alert("Preencha e-mail e senha!");
 
+    // Busca a conta no localStorage
     const raw = localStorage.getItem("account_" + email);
     if (!raw) return alert("Usuário não encontrado!");
 
@@ -214,14 +260,16 @@ function logar() {
         return alert("Dados de conta inválidos.");
     }
 
+    // Confere se a senha bate
     if (account.password !== pass) return alert("Senha incorreta.");
+    
+    // Cria token e salva dados do usuário logado
     const token = gerarToken(account.username || email);
     localStorage.setItem("token", token);
-
     localStorage.setItem("usuario", account.username || email);
     localStorage.setItem("email", email);
 
-    // Verifica redirecionamento
+    // Se veio do checkout, volta pra lá
     const params = new URLSearchParams(window.location.search);
     const redirect = params.get('redirect');
     
@@ -233,12 +281,14 @@ function logar() {
 }
 window.logar = logar;
 
+// Deleta a conta do usuário
 function deletarConta() {
     const email = localStorage.getItem('email');
     if (!email) return alert('E-mail não encontrado. Faça login novamente.');
 
     if (!confirm('Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.')) return;
 
+    // Limpa tudo do localStorage
     localStorage.removeItem('account_' + email);
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
@@ -249,6 +299,7 @@ function deletarConta() {
 }
 window.deletarConta = deletarConta;
 
+// Mostra o painel do usuário logado (esconde login/cadastro)
 function mostrarPainel() {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("usuario");
@@ -259,6 +310,7 @@ function mostrarPainel() {
     const usuarioEl = document.getElementById("usuario");
     const tokenElemLocal = document.getElementById("token");
 
+    // Se tem token, usuário tá logado
     if (token && painelEl) {
         if (cadastroEl) cadastroEl.style.display = "none";
         if (loginEl) loginEl.style.display = "none";
@@ -271,15 +323,18 @@ function mostrarPainel() {
 }
 window.mostrarPainel = mostrarPainel;
 
+// Faz logout do usuário
 function sair() {
+    // Limpa dados da sessão
     localStorage.removeItem("token");
     localStorage.removeItem("usuario");
-    localStorage.removeItem("email"); // Remove também o email para limpar o carrinho da sessão
+    localStorage.removeItem("email");
 
     const cadastroEl = document.getElementById("cadastro");
     const loginEl = document.getElementById("login");
     const painelEl = document.getElementById("painel");
 
+    // Mostra os formulários de novo
     if (cadastroEl) cadastroEl.style.display = "block";
     if (loginEl) loginEl.style.display = "block";
     if (painelEl) painelEl.style.display = "none";
@@ -288,10 +343,12 @@ function sair() {
 }
 window.sair = sair;
 
+// Chama mostrarPainel quando a página carrega
 document.addEventListener('DOMContentLoaded', function() {
     mostrarPainel();
 });
 
+// Se usuário está logado, redireciona links de login pra área logada
 document.addEventListener('DOMContentLoaded', function() {
     const token = localStorage.getItem('token');
     if (!token) return;
@@ -310,7 +367,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Pagina molde
+
+// CATÁLOGO DE PRODUTOS/SERVIÇOS
+
+// Aqui ficam todos os serviços que o site oferece
 const produtos = {
   "programacao-1": {
     titulo: "Desenvolvimento Web - Básico",
@@ -364,11 +424,16 @@ const produtos = {
 };
 
 
+// PÁGINA DE DETALHES DO PRODUTO
+
+
+// Pega parâmetros da URL (ex: ?id=programacao-1)
 function getQueryParam(name) {
   const params = new URLSearchParams(window.location.search);
   return params.get(name);
 }
 
+// Carrega os dados do produto na página de detalhes
 function carregarProduto() {
   const id = getQueryParam('id');
   const main = document.getElementById('detalhe');
@@ -377,9 +442,10 @@ function carregarProduto() {
   const preco = document.getElementById('preco');
   const descricao = document.getElementById('descricao');
 
-  // Se não estiver na página de detalhes, não faz nada
+  // Se não tá na página de detalhes, não faz nada
   if (!main || !titulo) return;
 
+  // Se produto não existe, mostra mensagem de erro
   if (!id || !produtos[id]) {
     titulo.textContent = "Produto não encontrado";
     descricao.textContent = "Verifique se o link está correto.";
@@ -388,6 +454,7 @@ function carregarProduto() {
     return;
   }
 
+  // Preenche a página com os dados do produto
   const p = produtos[id];
   titulo.textContent = p.titulo;
   imagem.src = p.imagem;
@@ -398,18 +465,21 @@ function carregarProduto() {
 
 carregarProduto();
 
-// Sistema de avaliação por estrelas
+
+// SISTEMA DE AVALIAÇÃO POR ESTRELAS
+
+// Permite o usuário avaliar os serviços com 1 a 5 estrelas
 document.addEventListener("DOMContentLoaded", () => {
   const estrelas = document.querySelectorAll(".estrela");
   const resultado = document.getElementById("resultado-avaliacao");
   
-  // Verifica se os elementos existem
+  // Se não tiver estrelas na página, não faz nada
   if (estrelas.length === 0 || !resultado) return;
   
   const idProduto = getQueryParam('id');
   const email = localStorage.getItem('email');
   
-  // Carregar avaliação salva
+  // Se já avaliou antes, mostra a nota salva
   if (email && idProduto) {
       const notaSalva = localStorage.getItem(`avaliacao_${email}_${idProduto}`);
       if (notaSalva) {
@@ -422,18 +492,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   estrelas.forEach((estrela, index) => {
+    // Efeito de hover - destaca as estrelas quando passa o mouse
     estrela.addEventListener("mouseover", () => {
       estrelas.forEach((e, i) => {
         e.classList.toggle("hover", i <= index);
       });
     });
 
+    // Remove o efeito quando tira o mouse
     estrela.addEventListener("mouseout", () => {
       estrelas.forEach(e => e.classList.remove("hover"));
     });
 
+    // Quando clica, salva a avaliação
     estrela.addEventListener("click", () => {
       const email = localStorage.getItem('email');
+      // Precisa estar logado pra avaliar
       if (!email) {
           alert("Você precisa estar logado para avaliar.");
           window.location.href = "../PI - Login/PI - Login.html";
@@ -442,11 +516,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const avaliacao = index + 1;
       resultado.textContent = `Você avaliou com ${avaliacao} estrela${avaliacao > 1 ? "s" : ""}.`;
+      
+      // Marca as estrelas selecionadas
       estrelas.forEach((e, i) => {
         e.classList.toggle("selecionada", i < avaliacao);
       });
       
-      // Salvar avaliação
+      // Salva no localStorage
       if (idProduto) {
           localStorage.setItem(`avaliacao_${email}_${idProduto}`, avaliacao);
       }
@@ -454,32 +530,34 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Sistema de Busca Simples com Popup
+
+// SISTEMA DE BUSCA COM POPUP
+
+// Cria um popup de busca quando clica no ícone de lupa
 document.addEventListener('DOMContentLoaded', function() {
     var iconesBusca = document.querySelectorAll('img[alt="Procurar"]');
     
     iconesBusca.forEach(function(img) {
-        // Encontra o container correto (span) para posicionar o popup
+        // Acha o container da lupa
         var container = img.closest('span');
         if (!container) return;
         
         container.style.position = 'relative';
         img.style.cursor = 'pointer';
         
-        // Cria o elemento do popup
+        // Cria o popup de busca
         var popup = document.createElement('div');
         popup.className = 'search-popup';
         popup.innerHTML = 
             '<input type="text" placeholder="Buscar serviço...">' +
             '<button>🔍</button>';
         
-        // Adiciona ao container
         container.appendChild(popup);
         
         var input = popup.querySelector('input');
         var btn = popup.querySelector('button');
         
-        // Função que faz a busca funcionar
+        // Função principal da busca
         function realizarBusca() {
             var termo = input.value.trim();
             
@@ -487,14 +565,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 var termoMinusculo = termo.toLowerCase();
                 var termoLimpo = removerAcentos(termoMinusculo);
 
-                // Função simples para mudar de página
                 function irPara(pagina) {
                     window.location.href = pagina;
                 }
 
-                // --- Redirecionamentos (Palavras-chave) ---
-
-                // 1. Ajuda e Suporte
+                // Palavras-chave que redirecionam pra páginas específicas
+                
+                // Página de Ajuda
                 var palavrasAjuda = ['ajuda', 'suporte', 'duvidas', 'faq', 'contato', 'socorro'];
                 for (var i = 0; i < palavrasAjuda.length; i++) {
                     if (termoLimpo.includes(palavrasAjuda[i])) {
@@ -503,7 +580,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // 2. Início e Home
+                // Página Inicial
                 var palavrasInicio = ['inicio', 'home', 'comeco', 'inicial', 'principal', 'vitrine', 'voltar'];
                 for (var i = 0; i < palavrasInicio.length; i++) {
                     if (termoLimpo.includes(palavrasInicio[i])) {
@@ -512,7 +589,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // 3. Sobre e Quem Somos
+                // Página Sobre
                 var palavrasSobre = ['sobre', 'quem somos', 'empresa', 'nos', 'historia'];
                 for (var i = 0; i < palavrasSobre.length; i++) {
                     if (termoLimpo.includes(palavrasSobre[i])) {
@@ -521,7 +598,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // 4. Login e Cadastro
+                // Página de Login
                 var palavrasLogin = ['login', 'entrar', 'acessar', 'logar', 'signin'];
                 for (var i = 0; i < palavrasLogin.length; i++) {
                     if (termoLimpo.includes(palavrasLogin[i])) {
@@ -530,6 +607,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
 
+                // Página de Cadastro
                 var palavrasCadastro = ['cadastro', 'cadastrar', 'criar conta', 'inscrever', 'registro', 'signup'];
                 for (var i = 0; i < palavrasCadastro.length; i++) {
                     if (termoLimpo.includes(palavrasCadastro[i])) {
@@ -538,7 +616,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // 5. Carrinho
+                // Página do Carrinho
                 var palavrasCarrinho = ['carrinho', 'cesta', 'compras', 'pedido', 'sacola'];
                 for (var i = 0; i < palavrasCarrinho.length; i++) {
                     if (termoLimpo.includes(palavrasCarrinho[i])) {
@@ -547,11 +625,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
 
-                // 6. Serviços (Geral)
+                // Página de Serviços (lista geral)
                 var palavrasServicos = ['servicos', 'todos', 'lista', 'catalogo', 'produtos'];
                 for (var i = 0; i < palavrasServicos.length; i++) {
                     if (termoLimpo === palavrasServicos[i] || termoLimpo === palavrasServicos[i] + 's') {
-                        // Vai para a página de serviços sem filtro
                         var destino = "../PI - Serviços/PI - Serviços.html";
                         if (window.location.pathname.includes("/PI - Serviços/")) {
                             destino = "PI - Serviços.html";
@@ -561,36 +638,37 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
 
-                // --- Busca Padrão (Filtro) ---
+                // Se não bateu com nenhuma palavra-chave, busca nos serviços
                 var paginaDestino = "../PI - Serviços/PI - Serviços.html";
                 var caminhoAtual = window.location.pathname;
                 
-                // Arruma o caminho dependendo de onde a gente está
+                // Ajusta o caminho dependendo de onde tá
                 if (caminhoAtual.includes("/PI - Serviços/")) {
                     paginaDestino = "PI - Serviços.html";
                 } else if (caminhoAtual.includes("/PI - Página Inicial/")) {
                     paginaDestino = "../PI - Serviços/PI - Serviços.html";
                 }
                 
-                // Vai para a página com o termo da busca
+                // Manda pra página de serviços com o termo de busca
                 window.location.href = paginaDestino + "?busca=" + encodeURIComponent(termo);
             }
         }
         
-        // Eventos do Popup
+        // Eventos do popup
         popup.addEventListener('click', function(e) {
-            e.stopPropagation(); // Não fecha ao clicar dentro
+            e.stopPropagation(); // Não fecha quando clica dentro
         });
 
         btn.addEventListener('click', realizarBusca);
         
+        // Enter também busca
         input.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 realizarBusca();
             }
         });
         
-        // Evento de abrir/fechar ao clicar no ícone
+        // Abre/fecha o popup ao clicar na lupa
         var link = img.closest('a');
         var gatilho = link || img;
         
@@ -605,7 +683,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             
-            // Abre ou fecha o atual
+            // Toggle do popup atual
             if (popup.classList.contains('active')) {
                 popup.classList.remove('active');
             } else {
@@ -617,25 +695,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Fecha popup ao clicar fora
+    // Fecha popup ao clicar fora dele
     document.addEventListener('click', function() {
         document.querySelectorAll('.search-popup.active').forEach(function(p) {
             p.classList.remove('active');
         });
     });
 
-    // Executar busca se houver parâmetro na URL
+    // Se tem termo de busca na URL, filtra os serviços
     var params = new URLSearchParams(window.location.search);
     var busca = params.get('busca');
     
-    // Verifica se estamos na página de serviços
     var urlAtual = decodeURIComponent(window.location.href);
     var ehPaginaServicos = urlAtual.includes("PI - Serviços.html") || document.querySelector('.categoria');
 
     if (busca && ehPaginaServicos) {
         var termo = removerAcentos(busca.toLowerCase());
         
-        // Limpar seleção lateral
+        // Limpa seleção do menu lateral
         var menuLateral = document.querySelectorAll('.menu-lateral li');
         if (menuLateral) {
             menuLateral.forEach(function(li) {
@@ -643,14 +720,14 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // Mostrar todas as categorias inicialmente
+        // Mostra todas as categorias
         document.querySelectorAll('.categoria').forEach(function(cat) {
             cat.classList.add('active');
         });
         
         var encontrouAlgum = false;
         
-        // Filtrar cards
+        // Filtra os cards que batem com a busca
         document.querySelectorAll('.card').forEach(function(card) {
             var tituloEl = card.querySelector('.card-title');
             if (tituloEl) {
@@ -666,7 +743,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Esconder categorias vazias
+        // Esconde categorias que ficaram vazias
         document.querySelectorAll('.categoria').forEach(function(cat) {
             var cardsVisiveis = Array.from(cat.querySelectorAll('.card')).filter(function(c) {
                 return c.style.display !== 'none';
@@ -679,7 +756,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Atualizar título da página
+        // Atualiza o título da página com o resultado
         var tituloPagina = document.querySelector('.meio-titulo-serviços');
         if (tituloPagina) {
             if (encontrouAlgum) {
@@ -692,13 +769,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// === SISTEMA DE CARRINHO SIMPLIFICADO ===
 
-// Obter carrinho do localStorage (suporta login)
+// SISTEMA DE CARRINHO DE COMPRAS
+
+
+// Pega o carrinho do localStorage (cada usuário tem o seu)
 function obterCarrinho() {
     try {
         var email = localStorage.getItem('email');
-        if (!email) return []; // Retorna vazio se não estiver logado
+        if (!email) return []; // Se não tá logado, carrinho vazio
 
         var key = 'carrinho_' + email;
         var dados = localStorage.getItem(key);
@@ -708,18 +787,18 @@ function obterCarrinho() {
     }
 }
 
-// Salvar carrinho no localStorage (suporta login)
+// Salva o carrinho no localStorage
 function salvarCarrinho(carrinho) {
     var email = localStorage.getItem('email');
-    if (!email) return; // Não salva se não estiver logado
+    if (!email) return; // Não salva se não tiver logado
 
     var key = 'carrinho_' + email;
     localStorage.setItem(key, JSON.stringify(carrinho));
 }
 
-// Adicionar item ao carrinho
+// Adiciona um serviço no carrinho
 function adicionarAoCarrinho() {
-    // Verifica se está logado antes de qualquer coisa
+    // Primeiro verifica se tá logado
     var email = localStorage.getItem('email');
     if (!email) {
         alert("Você precisa estar logado para adicionar itens ao carrinho.");
@@ -739,7 +818,7 @@ function adicionarAoCarrinho() {
     var produto = produtos[id];
     var carrinho = obterCarrinho();
     
-    // Verifica se já está no carrinho
+    // Verifica se já tá no carrinho
     var itemExistente = false;
     for(var i=0; i<carrinho.length; i++) {
         if(carrinho[i].id === id) {
@@ -753,7 +832,7 @@ function adicionarAoCarrinho() {
         return;
     }
     
-    // Adiciona ao carrinho
+    // Adiciona o item
     carrinho.push({
         id: id,
         titulo: produto.titulo,
@@ -766,31 +845,34 @@ function adicionarAoCarrinho() {
     alert('✓ Serviço adicionado ao carrinho!');
 }
 
-// Remover item do carrinho
+// Remove um item do carrinho
 function removerDoCarrinho(id) {
     var carrinho = obterCarrinho();
     var novoCarrinho = [];
+    
+    // Monta um novo array sem o item removido
     for(var i=0; i<carrinho.length; i++) {
         if(carrinho[i].id !== id) {
             novoCarrinho.push(carrinho[i]);
         }
     }
+    
     salvarCarrinho(novoCarrinho);
-    carregarCarrinho();
+    carregarCarrinho(); // Atualiza a tela
 }
 
-// Exibir carrinho na página
+// Mostra os itens do carrinho na página
 function carregarCarrinho() {
     var carrinhoVazio = document.getElementById('carrinho-vazio');
     var carrinhoLista = document.getElementById('carrinho-lista');
     var carrinhoResumo = document.getElementById('carrinho-resumo');
     
-    // Se não está na página do carrinho, retorna
+    // Se não tá na página do carrinho, sai fora
     if (!carrinhoLista) return;
     
     var carrinho = obterCarrinho();
     
-    // Carrinho vazio
+    // Se tá vazio, mostra mensagem
     if (carrinho.length === 0) {
         carrinhoVazio.style.display = 'block';
         carrinhoLista.style.display = 'none';
@@ -798,12 +880,12 @@ function carregarCarrinho() {
         return;
     }
     
-    // Carrinho com itens
+    // Se tem itens, mostra a lista
     carrinhoVazio.style.display = 'none';
     carrinhoLista.style.display = 'block';
     carrinhoResumo.style.display = 'block';
     
-    // Gera HTML dos itens para exibir na lista
+    // Monta o HTML dos itens
     var html = '';
     var total = 0;
     
@@ -823,13 +905,13 @@ function carregarCarrinho() {
     
     carrinhoLista.innerHTML = html;
     
-    // Atualiza valores
+    // Atualiza os totais
     var totalFormatado = total.toFixed(2).replace('.', ',');
     document.getElementById('subtotal').textContent = 'R$ ' + totalFormatado;
     document.getElementById('total').textContent = 'R$ ' + totalFormatado;
 }
 
-// Finalizar compra
+// Vai pro checkout
 function finalizarCompra() {
     var carrinho = obterCarrinho();
     
@@ -838,7 +920,7 @@ function finalizarCompra() {
         return;
     }
 
-    // Verifica se está logado
+    // Precisa tá logado
     var email = localStorage.getItem('email');
     if (!email) {
         var confirmacao = confirm('Você precisa estar logado para finalizar a compra. Deseja fazer login agora?');
@@ -848,43 +930,48 @@ function finalizarCompra() {
         return;
     }
     
-    // Redireciona para a página de checkout
     window.location.href = '../PI - Checkout/PI - Checkout.html';
 }
 
-// Inicializar quando a página carregar
+// Carrega o carrinho quando a página abre
 document.addEventListener('DOMContentLoaded', function() {
     carregarCarrinho();
 });
 
-// Também tenta carregar imediatamente para páginas já carregadas
+// Backup: tenta carregar se a página já tava pronta
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
     setTimeout(carregarCarrinho, 100);
 }
 
-// Expor funções globalmente
+// Deixa as funções disponíveis globalmente (pro onclick funcionar)
 window.adicionarAoCarrinho = adicionarAoCarrinho;
 window.removerDoCarrinho = removerDoCarrinho;
 window.finalizarCompra = finalizarCompra;
 window.carregarCarrinho = carregarCarrinho;
 
-// === LÓGICA DE CHECKOUT ===
+
+// PÁGINA DE CHECKOUT
+
 
 document.addEventListener('DOMContentLoaded', function() {
     carregarResumoCheckout();
 });
 
+// Mostra o resumo do pedido no checkout
 function carregarResumoCheckout() {
     var carrinho = obterCarrinho();
     var listaItens = document.getElementById('lista-itens-resumo');
     
+    // Se não tá no checkout, sai fora
     if (!listaItens) return;
 
+    // Se carrinho vazio, volta pro carrinho
     if (carrinho.length === 0) {
         window.location.href = '../PI - Carrinho/PI - Carrinho.html';
         return;
     }
 
+    // Monta a lista de itens
     var html = '';
     var total = 0;
 
@@ -903,6 +990,7 @@ function carregarResumoCheckout() {
 
     listaItens.innerHTML = html;
     
+    // Atualiza os totais
     var totalFormatado = 'R$ ' + total.toFixed(2).replace('.', ',');
     var subtotalEl = document.getElementById('resumo-subtotal');
     var totalEl = document.getElementById('resumo-total');
@@ -911,16 +999,17 @@ function carregarResumoCheckout() {
     if(totalEl) totalEl.textContent = totalFormatado;
 }
 
+// Seleciona a forma de pagamento
 function selecionarPagamento(elemento, metodo) {
-    // Remove seleção anterior
+    // Tira a seleção do anterior
     document.querySelectorAll('.metodo-opcao').forEach(function(el) {
         el.classList.remove('selected');
     });
     
-    // Seleciona novo
+    // Marca o novo
     elemento.classList.add('selected');
     
-    // Mostra/esconde formulário de cartão
+    // Se for cartão, mostra o formulário
     var formCartao = document.getElementById('form-cartao');
     if (metodo === 'cartao') {
         formCartao.style.display = 'block';
@@ -928,13 +1017,14 @@ function selecionarPagamento(elemento, metodo) {
         formCartao.style.display = 'none';
     }
 }
-//Validação do corrinho com meus pedidos
-function confirmarPedido() {
 
+// Confirma o pedido e salva em "Meus Pedidos"
+function confirmarPedido() {
     var nome = document.getElementById('nome').value;
     var emailInput = document.getElementById('email').value;
     var endereco = document.getElementById('endereco').value;
 
+    // Valida campos obrigatórios
     if (!nome || !emailInput || !endereco) {
         alert('Por favor, preencha todos os campos obrigatórios.');
         return;
@@ -952,12 +1042,13 @@ function confirmarPedido() {
         return;
     }
 
+    // Pega pedidos antigos (se tiver)
     var pedidosAntigos = JSON.parse(localStorage.getItem("meus_pedidos_contratados")) || [];
 
+    // Transforma itens do carrinho em pedidos
     var novosPedidos = carrinho.map(function(item) {
         return {
             titulo: item.titulo,
-  
             prestador: item.prestador || "ConnectPro Parceiro", 
             valor: "R$ " + item.valor.toFixed(2).replace('.', ','),
             imagem: item.imagem,
@@ -966,40 +1057,39 @@ function confirmarPedido() {
         };
     });
 
+    // Junta tudo e salva
     var listaAtualizada = pedidosAntigos.concat(novosPedidos);
-
     localStorage.setItem("meus_pedidos_contratados", JSON.stringify(listaAtualizada));
 
+    // Limpa o carrinho
     localStorage.removeItem('carrinho_' + userEmail);
 
     alert('Pedido confirmado com sucesso! Você pode acompanhá-lo em "Meus Pedidos".');
-
     window.location.href = '../PI - Serviços/PI - Meus Serviços Contratados.html'; 
 }
 
-// ============================================================
-// === LÓGICA DA PÁGINA "MEUS SERVIÇOS CONTRATADOS" (NOVO) ===
-// ============================================================
+// PÁGINA MEUS SERVIÇOS CONTRATADOS
+// Mostra os pedidos que o usuário já fez
 
 document.addEventListener("DOMContentLoaded", function() {
     carregarPedidosNaTela();
 });
 
+// Carrega e mostra os pedidos do usuário
 function carregarPedidosNaTela() {
     const container = document.getElementById("lista-pedidos");
     
-    // IMPORTANTE: Se não estiver na página de pedidos, para aqui e não faz nada.
-    // Isso evita erros nas outras páginas (Home, Login, etc).
+    // Se não tá na página de pedidos, não faz nada
     if (!container) return;
 
     const pedidos = JSON.parse(localStorage.getItem("meus_pedidos_contratados")) || [];
     
-    // Mantém o título "Serviços Contratados" (classe retangulo) se existir
+    // Mantém o título se existir
     const tituloRetangulo = container.querySelector('.retangulo');
     container.innerHTML = ""; 
     if(tituloRetangulo) container.appendChild(tituloRetangulo);
 
-    // Se a lista estiver vazia
+    // Se não tem pedidos, mostra mensagem
     if (pedidos.length === 0) {
         container.innerHTML += `
             <div style="text-align: center; padding: 40px; color: #666; background: white; border-radius: 8px; margin-top: 20px;">
@@ -1011,8 +1101,9 @@ function carregarPedidosNaTela() {
         return;
     }
 
-    // Desenha os cards
+    // Monta os cards de cada pedido
     pedidos.forEach((pedido, index) => {
+        // Define cor e ícone do status
         let classeStatus = "status-pendente";
         let iconeStatus = "●";
         
@@ -1047,13 +1138,15 @@ function carregarPedidosNaTela() {
     });
 }
 
+// Cancela um pedido
 function cancelarPedido(index) {
     if(confirm("Tem certeza que deseja cancelar este serviço?")) {
         let pedidos = JSON.parse(localStorage.getItem("meus_pedidos_contratados")) || [];
-        pedidos.splice(index, 1); // Remove o item da lista
-        localStorage.setItem("meus_pedidos_contratados", JSON.stringify(pedidos)); // Salva nova lista
-        carregarPedidosNaTela(); // Recarrega a visualização
+        pedidos.splice(index, 1); // Remove o pedido da lista
+        localStorage.setItem("meus_pedidos_contratados", JSON.stringify(pedidos));
+        carregarPedidosNaTela(); // Atualiza a tela
     }
 }
-// Torna a função acessível para o botão HTML onclick="cancelarPedido(...)"
-window.cancelarPedido = cancelarPedido;D
+
+// Deixa a função disponível pro onclick
+window.cancelarPedido = cancelarPedido;
